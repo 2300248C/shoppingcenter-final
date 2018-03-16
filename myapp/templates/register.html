@@ -1,0 +1,27 @@
+{% extends 'base1.html' %}
+{% load staticfiles %}
+{% block content_block %}
+<div class="container">
+  <div class="register">
+          <form action="{% url 'register' %}" method="post">
+                 {% csrf_token %}
+                 <div align="center">
+                     <table border="0" align="center">
+                         <tr><td>Username：</td><td>{{ reg_form.username }}</td></tr>
+                         <tr><td>Email：</td><td>{{ reg_form.email }}</td></tr>
+                         <tr><td>Password：</td><td>{{ reg_form.password }}</td></tr>
+                         <tr><td>Confirm Password：</td><td>{{ reg_form.confirm_password }}</td></tr>
+                         <tr><td>Address：</td><td>{{ reg_form.address }}</td></tr>
+                         <tr><td>Tel：</td><td>{{ reg_form.phone }}</td></tr>
+                     </table>
+                 </div>
+                 <div class="clearfix"> </div>
+                  <div class="register-but">
+                       <input type="hidden" name="source_url" value="{{ request.META.HTTP_REFERER }}">
+                      <input type="submit" value="Submit">
+                      <div class="clearfix"> </div>
+          </div>
+              </form>
+    </div>
+</div>
+{% endblock %}

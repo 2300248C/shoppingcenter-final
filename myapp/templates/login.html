@@ -1,0 +1,32 @@
+{% extends 'base1.html' %}
+{% load staticfiles %}
+{% block content_block %}
+<div class="account">
+	<div class="container">
+		<h1>Sign in</h1>
+		<div class="account_grid">
+			   <div class="col-md-6 login-right">
+				<form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+					<span>Username</span>
+					{{ login_form.username }}
+
+					<span>Password</span>
+					{{ login_form.password }}
+					<div class="word-in">
+				  		<a class="forgot" href="#">Forget your password？</a>
+                        <input type="hidden" name="source_url" value="{{ request.META.HTTP_REFERER }}">
+				 		<input type="submit" value="Log in">
+				  	</div>
+			    </form>
+			   </div>
+			    <div class="col-md-6 login-left">
+			  	 <h4>New here？</h4>
+				 <p>You can start by signing up!</p>
+				 <a class="acount-btn" href="{% url 'register' %}">Create your account</a>
+			   </div>
+			   <div class="clearfix"> </div>
+			 </div>
+	</div>
+</div>
+{% endblock %}

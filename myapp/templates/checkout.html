@@ -1,0 +1,47 @@
+{% extends 'base1.html' %}
+{% load staticfiles %}
+{% block content_block %}
+<div class="container">
+  <div class="check-out">
+    <h1>Shopping Cart</h1>
+        <table >
+          {% if cart %}
+              <tr>
+                <th>Goods</th>
+                <th>Number</th>
+                <th>Original Price</th>
+                <th>Current Price</th>
+                <th>Total</th>
+            </tr>
+          {% else %}
+             <p>Your Shopping cart is empty！</p>
+          {% endif %}
+
+          {% for item in cart.items %}
+      <tr>
+      <td class="ring-in"><a href="{% url 'detail' %}?did={{ item.furniture.id }}" class="at-in"><img src="{{ MEDIA_URL }}{{ item.furniture.image_url_c }}" class="img-responsive" alt=""></a>
+      <div class="sed">
+        <h5>{{ item.furniture.name }}</h5>
+        <p>{{ item.furniture.desc }}</p>
+      </div>
+      <div class="clearfix"> </div></td>
+      <td class="check"><input type="text" value="{{ item.quantity }}" readonly="readonly"></td>
+      <td style="text-decoration:line-through">{{ item.furniture.old_price }}¥</td>
+      <td>{{ item.furniture.new_price }}¥</td>
+      <td>{{ item.sum_price }}¥</td>
+      </tr>
+          {% endfor %}
+          <tr>
+          <td>
+                <a href="{% url 'final_order' %}" class=" to-buy">Pay</a>
+              <span style="width:50px;"></span>
+              <a href="{% url 'index' %}" class=" to-buy">Continue purchasing</a>
+          &nbsp;&nbsp;&nbsp;Total Price：{{ cart.total_price }}¥</td>
+          </tr>
+  </table>
+
+  <div class="clearfix"> </div>
+    </div>
+</div>
+{% endblock %}
+
